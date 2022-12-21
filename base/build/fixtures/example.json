@@ -1,0 +1,23 @@
+[
+  {
+    "name": "marcelluswallace",
+    "password": "0987",
+    "roles": [
+      "superuser"
+    ]
+  },
+  {
+    "name": "vincentvarga",
+    "password": "9876",
+    "roles": [
+      "suppoerter"
+    ]
+  },
+  {
+    "name": "juleswinnfield",
+    "password": "8765",
+    "roles": [
+      "suppoerter"
+    ]
+  }
+]
