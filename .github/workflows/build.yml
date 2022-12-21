@@ -1,0 +1,43 @@
+name: Build image
+
+on:
+  workflow_dispatch:
+    inputs:
+      image:
+        description: "The image to build."
+        default: base
+        type: choice
+        options:
+          - base
+
+jobs:
+  build-image:
+    name: Build Image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: FranzDiebold/github-env-vars-action@v2.1.0
+      - uses: actions/checkout@v2
+      -
+        name: Get current time
+        uses: gerred/actions/current-time@master
+        id: current-time
+      -
+        name: Build Docker Image
+        env:
+          TIMESTAMP: "${{ steps.current-time.outputs.time }}"
+        run: |
+          docker build \
+            --build-arg BUILD_DATE=$TIMESTAMP \
+            --build-arg VCS_REF=$CI_REF_NAME \
+            --build-arg VERSION=$CI_REF_NAME \
+            --tag "ghcr.io/$CI_REPOSITORY_OWNER/einbaum/${{ inputs.image }}:$CI_REF_NAME" \
+            ./${{ inputs.image }}
+      -
+        name: Login to GHCR
+        run: echo $GH_CONTAINER_REGISTRY_TOKEN | docker login ghcr.io -u $GH_CONTAINER_REGISTRY_USER --password-stdin
+        env:
+          GH_CONTAINER_REGISTRY_TOKEN: ${{secrets.GH_CONTAINER_REGISTRY_TOKEN}}
+          GH_CONTAINER_REGISTRY_USER: ${{secrets.GH_CONTAINER_REGISTRY_USER}}
+      -
+        name: Push Image to GHCR
+        run: docker push "ghcr.io/$CI_REPOSITORY_OWNER/einbaum/${{ inputs.image }}:$CI_REF_NAME"
