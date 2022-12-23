@@ -6,7 +6,7 @@ WORKDIR /einbaum
 COPY ./build /einbaum
 RUN mv ./scripts /scripts && \
     chmod -R 755 /scripts && \
-    npm ci
+    npm install github:unb-libraries/einbaum
 
 ENTRYPOINT [ "/scripts/run.sh" ]
 

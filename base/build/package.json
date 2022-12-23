@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@unb-libraries/einbaum": "https://github.com/unb-libraries/einbaum",
-    "glob": "^8.0.3",
-    "lodash.merge": "^4.6.2"
-  }
-}
