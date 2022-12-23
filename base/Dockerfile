@@ -6,7 +6,9 @@ WORKDIR /einbaum
 COPY ./build /einbaum
 RUN mv ./scripts /scripts && \
     chmod -R 755 /scripts && \
-    npm install github:unb-libraries/einbaum
+    npm install github:unb-libraries/einbaum && \
+    # Uninstall local cypress as base image ships with a global install
+    npm uninstall cypress
 
 ENTRYPOINT [ "/scripts/run.sh" ]
 
