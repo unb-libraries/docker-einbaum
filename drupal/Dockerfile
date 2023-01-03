@@ -1,4 +1,4 @@
-FROM ghcr.io/unb-libraries/einbaum:12.x-1.x
+FROM ghcr.io/unb-libraries/einbaum/base:12.x-1.x
 
 COPY ./build/einbaum.config.js /einbaum/einbaum.config.js
 
