@@ -9,6 +9,7 @@ on:
         type: choice
         options:
           - base
+          - drupal
 
 jobs:
   build-image:
